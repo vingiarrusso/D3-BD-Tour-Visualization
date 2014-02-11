@@ -1,27 +1,103 @@
 <html>
-	<head>
-    <style>
-      body {
-        background-color: #aaa;
-        font-size: 200%;     
-        padding:0.3em;
-      }
-      section {    
-        background-color: #eee;
-        padding:2em;
-        margin:auto;
-        text-align:center;
-      } 
-    </style>
+<head>
   </head>
+  <body>
+    <link rel="stylesheet" href="public/styles.css">
+    <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script> 
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="jquery.tipsy.js"></script>
 
-	<body>
-    <section>
-		  <h1>Running on Rack!!</h1>
-    </section>
-	</body>
 
-	<script type="text/javascript">
-      console.log(document.getElementsByTagName("section")[0]);
-  </script>
+  <div class = "container">
+  </div> 
+  <div class = "stops">
+    Visualization of Blue Devils 2007 Summer Tour made with D3.js<br><br>
+    Hover over a point on the map to reveal details about this location and point to the next spot on tour.
+  </div>
+
+
+
+    <script>
+    var width = 960;
+    var height = 500;
+
+    var svg = d3.select('.container').append('svg')
+        .attr('width', width)
+        .attr('height', height);
+
+    var map = svg.append('g');
+    var points = svg.append('g');
+
+    var projection = d3.geo.albersUsa()
+        .scale(1000)
+        .translate([width/2, height/2]);
+
+
+    d3.json("us.json", function(error, us) {
+      map.append("path")
+          .datum(topojson.feature(us, us.objects.states))
+          .attr("d", d3.geo.path())
+          .attr("class", "states")
+          .style("opacity", "0.8")
+    });
+
+    d3.json("tour.json", function(error, data) {
+      points.selectAll('circle').data(data)
+        .enter().append('circle')
+         .attr("id", function(d){return d.eventID})
+         .attr("r", 3)
+         .attr("cx", function(d){ return projection([d.lng, d.lat])[0] })
+         .attr("cy", function(d){ return projection([d.lng, d.lat])[1] })
+         .style("fill", "blue")
+         .style("stroke", "white")
+         .style("stroke-width", 1)
+
+         //mouse events   
+          .on("mouseover", function(d, i){
+            if(!data[i+1]) return;
+            var pos1 = projection([d.lng, d.lat]); // current point
+            var pos2 = projection([data[i+1].lng, data[i+1].lat]); // next point
+            d3.select(this)
+              .transition().duration(4000).ease("elastic")
+              .style("fill", "white")
+              .style("stroke", "blue")
+              .style("stroke-width", 1)
+              .style("opacity", "0.7")
+              .attr("r", 12)
+              map.append("line")
+                .style("stroke", "black")
+                .attr("x1", pos1[0])
+                .attr("y1", pos1[1])
+                .attr("x2", pos2[0])
+                .attr("y2", pos2[1])
+        })
+         .on("mouseout", function() {
+            d3.select(this)
+              .transition().duration(3000).ease("elastic")
+              .style("fill", "blue")
+              .style("stroke", "white")
+              .style("stroke-width", 1)
+              .attr("r", 3)
+              svg.select('line')
+                  .remove()
+          })
+         //tipsy tooltip
+        $('circle').tipsy({ 
+        gravity: 's', 
+        html: true, 
+        title: function(d, i) {
+          var d = this.__data__
+          return "Date: " + d.date + "<br>" +
+                 "Name: " + d.name + "<br>" +
+                 "Location: " + d.locationName + "<br>" +
+                 "Score: " + d.score + "<br>" +
+                 "Placement: " + d.placement
+        }
+      });
+    });
+
+    </script>
+
+  </body>
 </html>
