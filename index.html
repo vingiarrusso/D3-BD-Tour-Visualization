@@ -15,12 +15,22 @@
   <div class = "stops">
     Visualization of Blue Devils 2007 Summer Tour made with D3.js<br><br>
     Each point on the map is a performance location.  Hover over it with your mouse to reveal more details.<br>
-    A line will connect you to the next stop on tour.
+    A line will connect you to the next stop on tour.  You can also click the link below to show all tour dates.<br><br>
+
+    <a href=""class="tour">Show Tour Dates</a><br>
 
   </div>
   <div class = "links">
-  <a href="#" class = "test">ksdlknf</a>
-</div>
+    <div class = "june">
+    June:
+    </div>
+    <div class = "july">
+    July:
+    </div>
+    <div class = "august">
+    August:
+    </div>
+  </div>
   
 
     <script>
@@ -50,8 +60,30 @@
     d3.json("tour.json", function(error, data) {
       console.log(data)
       data.forEach(function(data) {
-        $('.links').append("<a href ='#' class ='test' place=" + data.eventID + ">" + data.date + "</a><br>")
+        if (data.date.match(/June/)) {
+          //if I had more time to figure out a better way to do this, I would like to refactor this... vvvvv
+          if (data.day !== "30") {
+            $('.june').append("<a href ='#' class ='date' place=" + data.eventID + ">" + data.day + ",</a>");
+          } else {
+            $('.june').append("<a href ='#' class ='date' place=" + data.eventID + ">" + data.day + "</a>");
+          }
+        } 
+        else if (data.date.match(/July/)) {
+          if (data.day !== "29") {
+            $('.july').append("<a href ='#' class ='date' place=" + data.eventID + ">" + data.day + ",</a>");
+          } else {
+            $('.july').append("<a href ='#' class ='date' place=" + data.eventID + ">" + data.day + "</a>");
+          }
+        }
+        else {
+          if (data.day !== "11") {
+            $('.august').append("<a href ='#' class ='date' place=" + data.eventID + ">" + data.day + ",</a>");
+          } else {
+            $('.august').append("<a href ='#' class ='date' place=" + data.eventID + ">" + data.day + "</a>");
+          }
+        }
       })
+      //insert circles
       points.selectAll('circle').data(data)
         .enter().append('circle')
          .attr("id", function(d){return d.eventID})
@@ -62,7 +94,7 @@
          .style("stroke", "white")
          .style("stroke-width", 1)
 
-         //mouse events   
+         //mouse events for circles  
           .on("mouseover", function(d, i){
             if(!data[i+1]) return;
             var pos1 = projection([d.lng, d.lat]); // current point
@@ -82,7 +114,7 @@
                 .attr("x2", pos2[0])
                 .attr("y2", pos2[1])
         })
-         .on("mouseout", function() {
+          .on("mouseout", function() {
             d3.select(this)
               .transition().duration(3000).ease("elastic")
               .style("fill", "blue")
@@ -95,40 +127,51 @@
           })
          //tipsy tooltip
           $('circle').tipsy({ 
-        gravity: 's', 
-        html: true,
-        fade: true,
-        offset: 10, 
-        title: function(d, i) {
-          var d = this.__data__
-          return "Date: " + d.date + "<br>" +
-                 "Name: " + d.name + "<br>" +
-                 "Location: " + d.locationName +"<br>" +
-                  d.city + ", "  + d.state + "<br>" +
-                 "Score: " + d.score + "<br>" +
-                 "Placement: " + d.placement + "<br>"
-        }
-      })
+            gravity: 's', 
+            html: true,
+            fade: true,
+            offset: 10, 
+            title: function(d, i) {
+              var d = this.__data__
+              return "Date: " + d.date + "<br>" +
+                     "Name: " + d.name + "<br>" +
+                     "Location: " + d.locationName +"<br>" +
+                      d.city + ", "  + d.state + "<br>" +
+                     "Score: " + d.score + "<br>" +
+                     "Placement: " + d.placement + "<br>"
+            }
+          })
           //click for highlighting points on the map
-       $('.test').click(function(e) {
-          e.preventDefault();
-          var id = $(this).attr('place');
-          d3.select("circle[id='" + id + "']").transition()
-            .transition().duration(4000).ease("elastic")
-              .style("fill", "white")
-              .style("stroke", "blue")
-              .style("stroke-width", 1)
-              .style("opacity", "0.7")
-              .attr("r", 12)
-            .transition().duration(4000).ease("elastic")
-              .style("fill", "blue")
-              .style("stroke", "white")
-              .style("stroke-linecap", "round")
-              .style("stroke-width", 1)
-              .attr("r", 3)
-        });
+         $('.date').click(function(e) {
+            e.preventDefault();
+            var id = $(this).attr('place');
+            d3.select("circle[id='" + id + "']").transition()
+              .transition().duration(4000).ease("elastic")
+                .style("fill", "white")
+                .style("stroke", "blue")
+                .style("stroke-width", 1)
+                .style("opacity", "0.7")
+                .attr("r", 12)
+              .transition().duration(4000).ease("elastic")
+                .style("fill", "blue")
+                .style("stroke", "white")
+                .style("stroke-width", 1)
+                .attr("r", 3)
+          });
 
-    })
+         $('.tour').toggle(
+          function() {
+            $('.links').slideDown();
+          },
+          function() {
+            $('.links').slideUp();
+          });
+
+
+
+    });
+
+
     </script>
 
   </body>
