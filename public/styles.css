@@ -22,10 +22,10 @@ img {
   margin-top:-300px;
   padding: 10px;
   width: 250px;
-  height: 200px;
+  height: 230px;
   background-color: #015ac3;
   opacity: 0.9;
-  color: #C6C6CC;
+  color: white;
   text-shadow: 1px 1px black;
   border: 1px solid black;
   border-radius: 5px;
@@ -38,10 +38,10 @@ img {
   width: 500px;
   background-color: #015ac3;
   margin-left: 250px;
-  margin-top: -15px;
+  margin-top: -40px;
   padding: 7px;
   opacity: 0.9;
-  color: #C6C6CC;
+  color: white;
   text-shadow: 1px 1px black;
   border: 1px solid black;
   border-radius: 5px;
@@ -52,14 +52,14 @@ img {
   display: inline-block;
   padding: 5px;
   text-decoration:none; 
-  color:#C6C6CC;
-  -webkit-transition: color .2s ease-in-out;
-  -moz-transition: color .2s ease-in-out;
-  transition: color .2s ease-in-out;
+  color: white;
+  -webkit-transition: color .5s ease-in-out;
+  -moz-transition: color .5s ease-in-out;
+  transition: color .5s ease-in-out;
 }
 
  a:hover{
-  color: white;
+  color: gray;
 }
 
 .tipsy { 
@@ -71,7 +71,7 @@ img {
   
   .tipsy-inner { 
     background-color: #015ac3;
-    color: #C6C6CC; 
+    color: white; 
     max-width: 300px; 
     padding: 5px 8px 4px 8px; 
     text-shadow: 1px 1px black;
