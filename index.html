@@ -18,8 +18,10 @@
     A line will connect you to the next stop on tour.
 
   </div>
-
-
+  <div class = "links">
+  <a href="#" class = "test">ksdlknf</a>
+</div>
+  
 
     <script>
     var width = 960;
@@ -46,6 +48,10 @@
     });
 
     d3.json("tour.json", function(error, data) {
+      console.log(data)
+      data.forEach(function(data) {
+        $('.links').append("<a href ='#' class ='test' place=" + data.eventID + ">" + data.date + "</a><br>")
+      })
       points.selectAll('circle').data(data)
         .enter().append('circle')
          .attr("id", function(d){return d.eventID})
@@ -88,7 +94,7 @@
                   .remove()
           })
          //tipsy tooltip
-        $('circle').tipsy({ 
+          $('circle').tipsy({ 
         gravity: 's', 
         html: true,
         fade: true,
@@ -102,9 +108,27 @@
                  "Score: " + d.score + "<br>" +
                  "Placement: " + d.placement + "<br>"
         }
-      });
-    });
+      })
+          //click for highlighting points on the map
+       $('.test').click(function(e) {
+          e.preventDefault();
+          var id = $(this).attr('place');
+          d3.select("circle[id='" + id + "']").transition()
+            .transition().duration(4000).ease("elastic")
+              .style("fill", "white")
+              .style("stroke", "blue")
+              .style("stroke-width", 1)
+              .style("opacity", "0.7")
+              .attr("r", 12)
+            .transition().duration(4000).ease("elastic")
+              .style("fill", "blue")
+              .style("stroke", "white")
+              .style("stroke-linecap", "round")
+              .style("stroke-width", 1)
+              .attr("r", 3)
+        });
 
+    })
     </script>
 
   </body>
