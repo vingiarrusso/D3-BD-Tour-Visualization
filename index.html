@@ -11,9 +11,12 @@
 
   <div class = "container">
   </div> 
+  <img src="b-square_1.jpg">
   <div class = "stops">
     Visualization of Blue Devils 2007 Summer Tour made with D3.js<br><br>
-    Hover over a point on the map to reveal details about this location and point to the next spot on tour.
+    Each point on the map is a performance location.  Hover over it with your mouse to reveal more details.<br>
+    A line will connect you to the next stop on tour.
+
   </div>
 
 
@@ -67,7 +70,7 @@
               .attr("r", 12)
               map.append("line")
                 .style("stroke", "black")
-                .style("stroke-width", 3)
+                .style("stroke-width", 2)
                 .attr("x1", pos1[0])
                 .attr("y1", pos1[1])
                 .attr("x2", pos2[0])
@@ -78,6 +81,7 @@
               .transition().duration(3000).ease("elastic")
               .style("fill", "blue")
               .style("stroke", "white")
+              .style("stroke-linecap", "round")
               .style("stroke-width", 1)
               .attr("r", 3)
               svg.select('line')
@@ -85,7 +89,7 @@
           })
          //tipsy tooltip
         $('circle').tipsy({ 
-        gravity: 'se', 
+        gravity: 's', 
         html: true,
         fade: true,
         offset: 10, 
