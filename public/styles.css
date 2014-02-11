@@ -31,8 +31,35 @@ img {
   border-radius: 5px;
   box-shadow: 1px 1px 1px 1px gray,
              -1px -1px 1px 1px gray;
+}
 
+.links {
+  display: none;
+  width: 500px;
+  background-color: #015ac3;
+  margin-left: 250px;
+  margin-top: -15px;
+  padding: 7px;
+  opacity: 0.9;
+  color: #C6C6CC;
+  text-shadow: 1px 1px black;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px 1px gray,
+             -1px -1px 1px 1px gray;
+}
+ a {
+  display: inline-block;
+  padding: 5px;
+  text-decoration:none; 
+  color:#C6C6CC;
+  -webkit-transition: color .2s ease-in-out;
+  -moz-transition: color .2s ease-in-out;
+  transition: color .2s ease-in-out;
+}
 
+ a:hover{
+  color: white;
 }
 
 .tipsy { 
