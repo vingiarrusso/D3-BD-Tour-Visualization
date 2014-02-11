@@ -33,13 +33,13 @@
         .scale(1000)
         .translate([width/2, height/2]);
 
-
     d3.json("us.json", function(error, us) {
       map.append("path")
           .datum(topojson.feature(us, us.objects.states))
           .attr("d", d3.geo.path())
           .attr("class", "states")
-          .style("opacity", "0.8")
+          .style("opacity", "0.9")
+
     });
 
     d3.json("tour.json", function(error, data) {
@@ -67,6 +67,7 @@
               .attr("r", 12)
               map.append("line")
                 .style("stroke", "black")
+                .style("stroke-width", 3)
                 .attr("x1", pos1[0])
                 .attr("y1", pos1[1])
                 .attr("x2", pos2[0])
@@ -84,15 +85,18 @@
           })
          //tipsy tooltip
         $('circle').tipsy({ 
-        gravity: 's', 
-        html: true, 
+        gravity: 'se', 
+        html: true,
+        fade: true,
+        offset: 10, 
         title: function(d, i) {
           var d = this.__data__
           return "Date: " + d.date + "<br>" +
                  "Name: " + d.name + "<br>" +
-                 "Location: " + d.locationName + "<br>" +
+                 "Location: " + d.locationName +"<br>" +
+                  d.city + ", "  + d.state + "<br>" +
                  "Score: " + d.score + "<br>" +
-                 "Placement: " + d.placement
+                 "Placement: " + d.placement + "<br>"
         }
       });
     });

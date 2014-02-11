@@ -1,18 +1,17 @@
 .states {
-  fill: #ccc;
+  fill: #7D7D7D;
   stroke: #fff;
-  stroke-width: 1.5px;
+  stroke-width: 1px;
   stroke-linejoin: round;
   stroke-linecap: round;
 }
 .container {
   width: 1200px;
   height: 600px;
-  background: url('drums2.jpg');
-  background-size: cover;
 }
 
 .stops {
+  text-align: center;
   margin-left:900px;
   margin-top:-500px;
   width: 250px;
@@ -35,11 +34,11 @@
   
   .tipsy-inner { 
     background-color: #0010BA;
-    opacity: 0.8; 
     color: #FFF; 
-    max-width: 200px; 
+    max-width: 300px; 
     padding: 5px 8px 4px 8px; 
     text-align: center; 
+    border: 1px solid black;
   }
 
   /* Rounded corners */
@@ -50,9 +49,19 @@
   }
   
   /* Uncomment for shadow */
-  .tipsy-inner { box-shadow: 0 0 5px #000000; -webkit-box-shadow: 0 0 5px #000000; -moz-box-shadow: 0 0 5px #000000; }
+  .tipsy-inner { 
+    box-shadow: 0 0 5px #000000; 
+    -webkit-box-shadow: 0 0 5px #000000; 
+    -moz-box-shadow: 0 0 5px #000000; 
+  }
   
-  .tipsy-arrow { position: absolute; width: 0; height: 0; line-height: 0; border: 5px dashed #000; }
+  .tipsy-arrow { 
+    position: absolute; 
+    width: 0; 
+    height: 0; 
+    line-height: 0; 
+    border: 8px dashed #000; 
+  }
   
   /* Rules to colour arrows */
   .tipsy-arrow-n { border-bottom-color: #000; }
