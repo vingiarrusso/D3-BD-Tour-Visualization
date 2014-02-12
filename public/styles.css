@@ -1,3 +1,7 @@
+body {
+  font-family: 'Oregano', cursive;
+}
+
 .states {
   fill: #7D7D7D;
   stroke: #fff;
@@ -6,9 +10,23 @@
   stroke-linecap: round;
 }
 
-.path {
-  stroke: yellow;
-  fill: orange;
+.tour {
+  margin-left: 970px;
+  margin-top: 15px;
+  background-color:#015ac3;
+  -moz-border-radius:28px;
+  -webkit-border-radius:28px;
+  border-radius:28px;
+  border:1px solid black;
+  cursor:pointer;
+  color:#ffffff;
+  font-family: 'Oregano', cursive;
+  font-size:17px;
+  padding:16px 31px;
+  text-decoration:none;
+  text-shadow:1px 1px black;
+  box-shadow: 1px 1px 1px 1px gray,
+             -1px -1px 1px 1px gray;
 }
 
 .play {
@@ -31,7 +49,7 @@ img {
   margin-top:-300px;
   padding: 10px;
   width: 250px;
-  height: 260px;
+  height: 200px;
   background-color: #015ac3;
   opacity: 0.9;
   color: white;
@@ -47,7 +65,7 @@ img {
   width: 500px;
   background-color: #015ac3;
   margin-left: 250px;
-  margin-top: -60px;
+  margin-top: -65px;
   padding: 7px;
   opacity: 0.9;
   color: white;
@@ -67,8 +85,19 @@ img {
   transition: color .5s ease-in-out;
 }
 
+
  a:hover{
   color: gray;
+}
+
+.tour:hover {
+  color: white;
+  opacity: 0.8;
+}
+
+.tour:active {
+  box-shadow: 0px 0px 0px 0px gray inset,
+              0px 0px 0px 1px gray inset;
 }
 
 .tipsy { 
