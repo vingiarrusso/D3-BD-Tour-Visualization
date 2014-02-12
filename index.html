@@ -54,11 +54,9 @@
           .attr("d", d3.geo.path())
           .attr("class", "states")
           .style("opacity", "0.9")
-
     });
 
     d3.json("tour.json", function(error, data) {
-      console.log(data)
       data.forEach(function(data) {
         if (data.date.match(/June/)) {
           //if I had more time to figure out a better way to do this, I would like to refactor this... vvvvv

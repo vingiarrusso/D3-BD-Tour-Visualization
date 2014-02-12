@@ -5,6 +5,15 @@
   stroke-linejoin: round;
   stroke-linecap: round;
 }
+
+.path {
+  stroke: yellow;
+  fill: orange;
+}
+
+.play {
+  fill: #000;
+}
 .container {
   width: 1200px;
   height: 600px;
@@ -22,7 +31,7 @@ img {
   margin-top:-300px;
   padding: 10px;
   width: 250px;
-  height: 240px;
+  height: auto;
   background-color: #015ac3;
   opacity: 0.9;
   color: white;
