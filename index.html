@@ -50,11 +50,12 @@
         .translate([width/2, height/2]);
 
     d3.json("us.json", function(error, us) {
-      map.append("path")
-          .datum(topojson.feature(us, us.objects.states))
-          .attr("d", d3.geo.path())
-          .attr("class", "states")
-          .style("opacity", "0.9")
+        map.selectAll("path")
+                .data(topojson.feature(us, us.objects.states).features)
+                .enter().append("path")
+                .attr("d", d3.geo.path())       
+                .attr("class", "states")
+                .style("opacity", "0.9")
     });
 
     d3.json("tour.json", function(error, data) {
