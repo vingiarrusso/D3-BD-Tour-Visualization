@@ -10,6 +10,10 @@ body {
   stroke-linecap: round;
 }
 
+path:hover {
+  fill: #015ac3;
+}
+
 .tour {
   margin-left: 970px;
   margin-top: 15px;
